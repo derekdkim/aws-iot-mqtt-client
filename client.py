@@ -1,10 +1,10 @@
 import json
 from time import sleep
 import ssl
+import os
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
-import os
-from geopy import distance
+from util.geolocation import calculate_distance
 
 load_dotenv()
 
@@ -27,12 +27,7 @@ class IoTClient(object):
             incoming = json.loads(msg.payload)
             # Only emit if the source is from another device
             if incoming["id"] != os.getenv("ID"):
-                # Use GeoPy haversine formula to calculate distance
-                client_coord = (self.lat, self.lng)
-                payload_coord = (incoming["lat"], incoming["lng"])
-                print(
-                    f"Distance to {incoming['id']}: {round(distance.distance(client_coord, payload_coord).km)}km"
-                )
+                calculate_distance(self, incoming)
 
     def on_publish(self, client, userdata, msg):
         print("Sent message")
