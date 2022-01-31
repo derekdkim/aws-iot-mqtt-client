@@ -4,7 +4,7 @@ This simple pub-sub client connects to an MQTT broker over AWS IoT and listens f
 
 ## Demo
 
-My personal live test involved two clients, one in a `zsh` terminal on a Macbook, and another on a Raspberry Pi 3.
+My personal live test involved two clients, one in a `zsh` terminal on a Macbook, and another on a virtual machine on AWS EC2.
 
 ### Setup & Usage
 
@@ -40,3 +40,7 @@ ID=WPG
 LAT=49.8153341
 LNG=-97.0838079
 ```
+
+#### Testing
+
+1. `pytest`
